@@ -49,6 +49,7 @@ class LayoutSetting extends StatelessWidget {
         padding: EdgeInsets.zero,
         children: <Widget>[
           DrawerHeader(
+            // 顶部，右侧，我的设置部分： 语言
             child: Text(S.of(context).mySettings),
             decoration: BoxDecoration(
               color: Get.theme.primaryColor,

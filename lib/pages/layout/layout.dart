@@ -21,6 +21,12 @@ import 'package:get/get.dart';
 
 import 'layout_controller.dart';
 
+/** 登录之后，管理系统主页
+ *  1 PopupMenuButton 右侧按钮图片，点击后显示菜单：源码、反馈、关于、隐私.
+ *  2 LayoutSetting 顶部，右侧按钮，我的设置部分。
+ *  3 layoutMenu 顶部，左侧按钮。显示左侧抽屉管理布局：角色管理、子系统管理...
+ *  4 PopupMenuButton 顶部，左侧。选择子系统按钮
+ */
 class Layout extends StatefulWidget {
   @override
   _LayoutState createState() => _LayoutState();
@@ -58,8 +64,8 @@ class _LayoutState extends State {
         ? Scaffold(body: body)
         : Scaffold(
             key: scaffoldStateKey,
-            drawer: layoutMenu,
-            endDrawer: LayoutSetting(),
+            drawer: layoutMenu, // 顶部，左侧按钮。显示左侧抽屉管理布局：角色管理、子系统管理...
+            endDrawer: LayoutSetting(),// 顶部，右侧按钮，我的设置部分。
             body: body,
             appBar: getAppBar(),
           );
@@ -96,6 +102,7 @@ class _LayoutState extends State {
             tooltip: '选择子系统',
             onSelected: (String v) async {
               var subsystem = subsystemList.firstWhere((element) => element.id == v);
+              // 将选择的系统存储到缓存中，下次登录之后，读取缓存系统的状态。
               StoreUtil.write(Constant.KEY_CURRENT_SUBSYSTEM, subsystem.toMap());
               await StoreUtil.loadMenuData();
               StoreUtil.init();
@@ -168,6 +175,7 @@ class _LayoutState extends State {
           ),
         ),
         PopupMenuButton(
+          // 顶部，最右侧按钮，菜单部分。
           onSelected: (dynamic v) {
             switch (v) {
               case 'code':

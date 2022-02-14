@@ -41,7 +41,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Map<String, Widget> pageMap = {
-      '/': Layout(),
+      '/': Layout(), // 主页路由
       '/login': Login(),
       '/register': Register(),
     };

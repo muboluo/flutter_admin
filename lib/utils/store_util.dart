@@ -17,6 +17,10 @@ import 'package:flutter_admin/models/tab_page.dart';
 import 'package:flutter_admin/models/user_info.dart';
 import 'package:get_storage/get_storage.dart';
 
+/**
+ * 缓存读写工具类，将数据缓存至浏览器中。
+ * 相当于 Android 的SP
+ */
 class StoreUtil {
   static read(String key) {
     return GetStorage().read(key);
@@ -44,7 +48,9 @@ class StoreUtil {
 
   static List<TabPage?> readOpenedTabPageList() {
     var data = read(Constant.KEY_OPENED_TAB_PAGE_LIST);
-    return data == null ? [] : List.from(data).map((e) => TabPage.fromMap(e)).toList();
+    return data == null
+        ? []
+        : List.from(data).map((e) => TabPage.fromMap(e)).toList();
   }
 
   static writeOpenedTabPageList(List<TabPage?> list) {
@@ -67,12 +73,16 @@ class StoreUtil {
 
   static List<Menu> getMenuList() {
     var data = GetStorage().read(Constant.KEY_MENU_LIST);
-    return data == null ? [] : List.from(data).map((e) => Menu.fromMap(e)).toList();
+    return data == null
+        ? []
+        : List.from(data).map((e) => Menu.fromMap(e)).toList();
   }
 
   static List<Subsystem> getSubsystemList() {
     var data = GetStorage().read(Constant.KEY_SUBSYSTEM_LIST);
-    return data == null ? [] : List.from(data).map((e) => Subsystem.fromMap(e)).toList();
+    return data == null
+        ? []
+        : List.from(data).map((e) => Subsystem.fromMap(e)).toList();
   }
 
   static Subsystem? getCurrentSubsystem() {
@@ -82,7 +92,9 @@ class StoreUtil {
 
   static List<TabPage> getDefaultTabs() {
     var data = GetStorage().read(Constant.KEY_DEFAULT_TABS);
-    return data == null ? [] : List.from(data).map((e) => TabPage.fromMap(e)).toList();
+    return data == null
+        ? []
+        : List.from(data).map((e) => TabPage.fromMap(e)).toList();
   }
 
   static Future<bool?> loadDict() async {
@@ -93,11 +105,16 @@ class StoreUtil {
     return responseBodyApi.success;
   }
 
+  // 网络请求子系统列表，并保存至本地
   static Future<bool?> loadSubsystem() async {
     ResponseBodyApi responseBodyApi = await SubsystemApi.listEnable();
     if (responseBodyApi.success!) {
       StoreUtil.write(Constant.KEY_SUBSYSTEM_LIST, responseBodyApi.data);
-      List<Subsystem> list = responseBodyApi.data == null ? [] : List.from(responseBodyApi.data).map((e) => Subsystem.fromMap(e)).toList();
+      List<Subsystem> list = responseBodyApi.data == null
+          ? []
+          : List.from(responseBodyApi.data)
+              .map((e) => Subsystem.fromMap(e))
+              .toList();
       if (list.isNotEmpty) {
         StoreUtil.write(Constant.KEY_CURRENT_SUBSYSTEM, list[0].toMap());
       }
@@ -110,7 +127,8 @@ class StoreUtil {
     if (currentSubsystem == null) {
       return true;
     }
-    ResponseBodyApi responseBodyApi = await MenuApi.listAuth(currentSubsystem.id);
+    ResponseBodyApi responseBodyApi =
+        await MenuApi.listAuth(currentSubsystem.id);
     if (responseBodyApi.success!) {
       StoreUtil.write(Constant.KEY_MENU_LIST, responseBodyApi.data);
     }
