@@ -12,6 +12,7 @@ class LayoutController extends GetxController {
   MenuDisplayType? menuDisplayType = MenuDisplayType.side;
   bool isMaximize = false;
 
+  // 触发，右侧tab详情部分是否占满布局的状态切换。
   toggleMaximize() {
     this.isMaximize = !this.isMaximize;
     this.update();

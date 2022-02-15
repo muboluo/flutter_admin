@@ -30,6 +30,7 @@ class Utils {
     );
   }
 
+  // 点击左侧menu，打开右侧标签布局
   static openTab(String id) {
     TabPage? tabPage = (StoreUtil.getDefaultTabs() + Routes.otherTabPage).firstWhereOrNull((element) => element.id == id);
     if (tabPage == null) {

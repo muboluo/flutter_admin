@@ -132,6 +132,7 @@ class LayoutCenterState extends State<LayoutCenter> with TickerProviderStateMixi
       }).toList(),
     );
 
+    // 创建 点击左侧布局按钮之后，更新右侧tab部分具体内容布局.
     var content = Container(
       child: Expanded(
         child: IndexedStackLazy(

@@ -34,6 +34,7 @@ import 'package:get/get.dart';
 class Routes {
   static List<GetPage>? pages;
 
+  // 路由地址，点击了左侧tab之后，右侧显示的详情部分。相当于主界面详情部分
   static Map<String, Widget> layoutPagesMap = {
     '/dashboard': Dashboard(),
     '/sAreaAgeGenderMain': SAreaAgeGenderMain(),
