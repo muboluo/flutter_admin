@@ -44,6 +44,7 @@ class _LayoutState extends State {
   @override
   Widget build(BuildContext context) => GetBuilder<LayoutController>(builder: (_) => _build(context));
 
+  // 构建全部页面, 右侧详情是LayoutCenter, 左侧是layoutMenu 部分。
   Widget _build(BuildContext context) {
     var layoutMenu = LayoutMenu(onClick: (Menu menu) => Utils.openTab(menu.id!));
     LayoutController layoutController = Get.find();
