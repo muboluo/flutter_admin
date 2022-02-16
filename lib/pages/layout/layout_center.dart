@@ -18,7 +18,7 @@ import 'package:flutter_admin/utils/utils.dart';
 import 'package:get/get.dart';
 
 /**
- * 左侧点击了tab之后，右侧展示的详情布局。
+ * 左侧点击了tab之后，右侧展示的详情布局。具体布局由 Routes.layoutPagesMap[] 中获取
  */
 class LayoutCenter extends StatefulWidget {
   LayoutCenter({Key? key}) : super(key: key);

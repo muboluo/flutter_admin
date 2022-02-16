@@ -25,14 +25,19 @@ import 'pages/layout/layout_menu_controller.dart';
 import 'router/main_router_delegate.dart';
 
 void main() async{
+  // 启动前，初始化一些配置
   await init();
   runApp(MyApp());
 }
 
 init() async {
+  // 初始化缓存管理库
   await GetStorage.init();
+  // 初始化 baseUrl, 超时时间，配置在 config目录下
   await ApplicationContext.instance.init();
+  // 初始化网络请求拦截器
   ApplicationContext.instance.addBean(CryConstant.KEY_DIO_INTERCEPTORS, [CryDioInterceptors()]);
+  // 状态管理： eg: 内容部分是否全屏
   Get.put(LayoutController());
   Get.put(LayoutMenuController());
 }
@@ -40,6 +45,7 @@ init() async {
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    // 把页面路由，注册到 pageMap中。跳转时，从 pageMap中取出目标路由。
     Map<String, Widget> pageMap = {
       '/': Layout(), // 主页路由
       '/login': Login(),
