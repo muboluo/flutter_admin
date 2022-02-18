@@ -53,6 +53,11 @@
 <!-- This script installs service_worker.js to provide PWA functionality to
      application. For more information, see:
      https://developers.google.com/web/fundamentals/primers/service-workers -->
+
+<!-- 指定适配器 为 html， 否则可能会出现中文渲染问题。-->
+<script type="text/javascript">
+    window.flutterWebRenderer = "html";
+</script>
 <script>
     var serviceWorkerVersion = null;
     var scriptLoaded = false;
