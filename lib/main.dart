@@ -14,6 +14,7 @@ import 'package:cry/cry.dart';
 import 'package:flutter_admin/common/cry_dio_interceptors.dart';
 import 'package:flutter_admin/pages/layout/layout.dart';
 import 'package:flutter_admin/pages/layout/layout_controller.dart';
+import 'package:flutter_admin/pages/layout2/layout2.dart';
 import 'package:flutter_admin/pages/login.dart';
 import 'package:flutter_admin/pages/register.dart';
 import 'package:flutter_admin/utils/utils.dart';
@@ -50,6 +51,7 @@ class MyApp extends StatelessWidget {
       '/': Layout(), // 主页路由
       '/login': Login(),
       '/register': Register(),
+      '/layout2': Layout2(),
     };
     return GetMaterialApp.router(
       key: UniqueKey(),
