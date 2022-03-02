@@ -22,6 +22,7 @@ class LayoutMenu extends StatefulWidget {
     Key? key,
     this.onClick,
   }) : super(key: key);
+  // 传入点击事件
   final Function? onClick;
 
   @override
@@ -42,7 +43,9 @@ class _LayoutMenuState extends State<LayoutMenu> {
   Widget build(BuildContext context) => GetBuilder<LayoutMenuController>(builder: (_) => _build(context));
 
   Widget _build(BuildContext context) {
+    // 左侧 menuList 是否展开
     this.expandMenu ??= isDisplayDesktop(context) || Utils.isMenuDisplayTypeDrawer(context);
+    // menu 顶部，展开/关闭所有menu 按钮
     var menuHeaderExpand = Row(
       children: [
         if (!Utils.isMenuDisplayTypeDrawer(context))
@@ -79,6 +82,7 @@ class _LayoutMenuState extends State<LayoutMenu> {
       ],
     );
 
+    // menu 顶部布局， 收起/展开 左侧 menu list 按钮
     var menuHeaderCollapse = Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
@@ -91,6 +95,7 @@ class _LayoutMenuState extends State<LayoutMenu> {
         ),
       ],
     );
+    // menu 顶部布局
     var menuHeader = Material(
       type: MaterialType.transparency,
       child: Container(
@@ -99,6 +104,7 @@ class _LayoutMenuState extends State<LayoutMenu> {
         child: expandMenu! ? menuHeaderExpand : menuHeaderCollapse,
       ),
     );
+    // menu 列表布局
     var menuBody = ListView(
       key: Key('builder ${expandAll.toString()}'),
       children: [
@@ -138,6 +144,7 @@ class _LayoutMenuState extends State<LayoutMenu> {
           key: Key(treeVO.data!.id!),
           initiallyExpanded: hasChildrenOpened || expandAll,
           leading: Icon(iconData),
+          // 展示子级tabList
           children: _getMenuListTile(treeVO.children, currentOpenedTabPageId),
           title: title,
           childrenPadding: EdgeInsets.only(left: this.expandMenu! ? 30 : 0),

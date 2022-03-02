@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_admin/models/menu.dart';
 import 'package:flutter_admin/pages/layout/layout_controller.dart';
+import 'package:flutter_admin/pages/layout/layout_menu.dart';
+import 'package:flutter_admin/utils/utils.dart';
 import 'package:get/get.dart';
 
 class Layout2 extends StatefulWidget {
@@ -18,6 +21,9 @@ class _LayoutState2 extends State {
       GetBuilder<LayoutController>(builder: (_) => _build(context));
 
   Widget _build(BuildContext context) {
+    LayoutMenu(onClick: (Menu menu) => Utils.openTab(menu.id!));
+
+
     return Scaffold();
   }
 }
