@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_admin/models/menu.dart';
 import 'package:flutter_admin/pages/layout/layout_controller.dart';
 import 'package:flutter_admin/pages/layout/layout_menu.dart';
+import 'package:flutter_admin/pages/layout2/layout_menu_2.dart';
 import 'package:flutter_admin/utils/utils.dart';
 import 'package:get/get.dart';
 
@@ -23,7 +24,8 @@ class _LayoutState2 extends State {
   Widget _build(BuildContext context) {
     LayoutMenu(onClick: (Menu menu) => Utils.openTab(menu.id!));
 
-
-    return Scaffold();
+    return LayoutMenu2(
+      onClick: () {},
+    );
   }
 }

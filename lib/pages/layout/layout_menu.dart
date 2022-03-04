@@ -22,6 +22,7 @@ class LayoutMenu extends StatefulWidget {
     Key? key,
     this.onClick,
   }) : super(key: key);
+
   // 传入点击事件
   final Function? onClick;
 
@@ -40,11 +41,13 @@ class _LayoutMenuState extends State<LayoutMenu> {
   }
 
   @override
-  Widget build(BuildContext context) => GetBuilder<LayoutMenuController>(builder: (_) => _build(context));
+  Widget build(BuildContext context) =>
+      GetBuilder<LayoutMenuController>(builder: (_) => _build(context));
 
   Widget _build(BuildContext context) {
     // 左侧 menuList 是否展开
-    this.expandMenu ??= isDisplayDesktop(context) || Utils.isMenuDisplayTypeDrawer(context);
+    this.expandMenu ??=
+        isDisplayDesktop(context) || Utils.isMenuDisplayTypeDrawer(context);
     // menu 顶部，展开/关闭所有menu 按钮
     var menuHeaderExpand = Row(
       children: [
@@ -52,8 +55,9 @@ class _LayoutMenuState extends State<LayoutMenu> {
           CryButton(
             iconData: Icons.chevron_left,
             onPressed: () {
-              expandMenu = !expandMenu!;
-              setState(() {});
+              setState(() {
+                expandMenu = !expandMenu!;
+              });
             },
           ),
         Expanded(
@@ -89,8 +93,10 @@ class _LayoutMenuState extends State<LayoutMenu> {
         CryButton(
           iconData: Icons.chevron_right,
           onPressed: () {
-            expandMenu = !expandMenu!;
-            setState(() {});
+            setState(() {
+              // 表示我们要修改哪些属性。
+              expandMenu = !expandMenu!;
+            });
           },
         ),
       ],
@@ -109,7 +115,8 @@ class _LayoutMenuState extends State<LayoutMenu> {
       key: Key('builder ${expandAll.toString()}'),
       children: [
         SizedBox(height: headerHeight),
-        ..._getMenuListTile(TreeUtil.toTreeVOList(StoreUtil.getMenuList()), StoreUtil.readCurrentOpenedTabPageId()),
+        ..._getMenuListTile(TreeUtil.toTreeVOList(StoreUtil.getMenuList()),
+            StoreUtil.readCurrentOpenedTabPageId()),
       ],
     );
     var menuStack = Stack(
@@ -127,19 +134,23 @@ class _LayoutMenuState extends State<LayoutMenu> {
     var result = Utils.isMenuDisplayTypeDrawer(context)
         ? Drawer(child: menuStack)
         : SizedBox(
-      width: expandMenu! ? 300 : 60,
-      child: menuStack,
-    );
+            width: expandMenu! ? 300 : 60,
+            child: menuStack,
+          );
     return result;
   }
 
-  List<Widget> _getMenuListTile(List<TreeVO<Menu>> data, String? currentOpenedTabPageId) {
+  List<Widget> _getMenuListTile(
+      List<TreeVO<Menu>> data, String? currentOpenedTabPageId) {
     List<Widget> listTileList = data.map<Widget>((TreeVO<Menu> treeVO) {
       IconData iconData = Utils.toIconData(treeVO.data!.icon);
-      String name = Utils.isLocalEn(context) ? treeVO.data!.nameEn ?? '' : treeVO.data!.name ?? '';
+      String name = Utils.isLocalEn(context)
+          ? treeVO.data!.nameEn ?? ''
+          : treeVO.data!.name ?? '';
       Text title = Text(expandMenu! ? name : '');
       if (treeVO.children.length > 0) {
-        bool hasChildrenOpened = treeVO.children.any((element) => currentOpenedTabPageId == element.data!.id);
+        bool hasChildrenOpened = treeVO.children
+            .any((element) => currentOpenedTabPageId == element.data!.id);
         return ExpansionTile(
           key: Key(treeVO.data!.id!),
           initiallyExpanded: hasChildrenOpened || expandAll,
@@ -151,11 +162,14 @@ class _LayoutMenuState extends State<LayoutMenu> {
         );
       } else {
         return ListTile(
-          tileColor: currentOpenedTabPageId == treeVO.data!.id ? Colors.blue.shade100 : null,
+          tileColor: currentOpenedTabPageId == treeVO.data!.id
+              ? Colors.blue.shade100
+              : null,
           leading: Icon(iconData, color: context.theme.primaryColor),
           title: title,
           onTap: () {
-            if (currentOpenedTabPageId != treeVO.data!.id && widget.onClick != null) {
+            if (currentOpenedTabPageId != treeVO.data!.id &&
+                widget.onClick != null) {
               widget.onClick!(treeVO.data);
             }
           },
